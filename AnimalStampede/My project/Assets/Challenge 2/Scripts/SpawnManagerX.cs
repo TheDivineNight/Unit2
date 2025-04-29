@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManagerX : MonoBehavior
+public class SpawnManagerX : MonoBehaviour
 {
-    public gameobject[] ballPrefabs;
+    public GameObject[] ballPrefabs;
 
     private float spawnLimitXLeft = -22;
     private float spawnLimitXRight = 7;
@@ -16,6 +16,7 @@ public class SpawnManagerX : MonoBehavior
     // Start is called before the first frame update
     void Start()
     {
+        spawnInterval = Random.Range(1, 2.3f);
         InvokeRepeating("SpawnRandomBall", startDelay, spawnInterval);
     }
 
@@ -26,7 +27,8 @@ public class SpawnManagerX : MonoBehavior
         Vector3 spawnPos = new Vector3 (Random.Range(spawnLimitXLeft, spawnLimitXRight), spawnPosY, 0);
 
         // instantiate ball at random spawn location
-        Instantiate(ballPrefabs[0], spawnPos, ballPrefabs[0], Transform.rotation);
+        int ballrateIndex = Random.Range(0, ballPrefabs.Length);
+        Instantiate(ballPrefabs[ballrateIndex], spawnPos, ballPrefabs[ballrateIndex].transform.rotation);
     }
 
 }
